@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Efficient Oxygen Utilization in Elite Runners</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="main.js" defer></script>
+  <style>
+    /* Controls and layout */
+    .controls {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .progress-container {
+      width: 80%;
+      height: 8px;
+      background: #eee;
+      margin: 10px auto;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    #progressBar {
+      width: 0%;
+      height: 100%;
+      background: #1a237e;
+      transition: width 0.5s ease;
+    }
+
+    /* Flex layout for chart + annotation */
+    .charts.flex {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .annotation-panel {
+      flex: 1;
+      max-width: 320px;
+      background: #f7f7f7;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .annotation-panel h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: #1a237e;
+    }
+    .annotation-panel p {
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .tooltip {
+      position: absolute;
+      pointer-events: none;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Efficient Oxygen Utilization in Elite Runners</h1>
+  </header>
+
+  <section class="background">
+    <h2>Background</h2>
+    <p>
+      In this study, we analyzed per-second physiological measurements from runners performing on a treadmill. 
+      The data capture how O₂ exchange efficiency and O₂ uptake evolve as athletes transition from warm-up
+      through peak performance to fatigue.
+    </p>
+  </section>
+
+  <section class="manipulation">
+    <h2>Data Preparation</h2>
+    <p>
+      We divided participants into five quantile groups based on their maximum achieved treadmill speed. 
+      For each second of the test, we calculated:
+    </p>
+    <ul>
+      <li>O₂ exchange efficiency (% of inspired O₂ absorbed)</li>
+      <li>O₂ uptake rate (mL of O₂ consumed per minute)</li>
+    </ul>
+    <p>
+      These metrics were averaged over time within each speed group. The x-axis represents elapsed time (s), 
+      and the y-axis shows the <em>average</em> O₂ value for that group. Opacity of each data point reflects 
+      the proportion of runners still active; groups falling below 10% survivors are no longer plotted.
+    </p>
+  </section>
+
+  <!-- Chart 1 -->
+  <section class="charts">
+    <div class="chart-container" id="efficiencyChart">
+      <h2>O₂ Exchange Efficiency Over Time</h2>
+      <h3 class="subtitle">Average % of inspired O₂ absorbed per second by speed group</h3>
+    </div>
+  </section>
+
+  <!-- Chart 2 + annotation panel -->
+  <section class="charts flex">
+    <div class="chart-container" id="rateChart">
+      <h2>O₂ Uptake Rate Over Time</h2>
+      <h3 class="subtitle">Average mL of O₂ consumed per minute by speed group</h3>
+    </div>
+    <aside class="annotation-panel" id="annotationPanel">
+      <h2>Stage Annotations</h2>
+      <p id="annotationText">Click "Play Animation" to begin a guided walkthrough of warm-up, threshold, and fatigue stages.</p>
+      <p><em>Please hover over the dots to see exact values.</em></p>
+    </aside>
+  </section>
+
+  <!-- Controls and Progress Bar under chart 2 -->
+  <section class="controls">
+    <button id="playBtn">Play Animation</button>
+    <button id="pauseBtn" disabled>Pause Animation</button>
+    <div class="progress-container">
+      <div id="progressBar"></div>
+    </div>
+  </section>
+
+  <section class="analysis">
+    <h2>Interpretation &amp; Next Steps</h2>
+    <p>
+      <strong>Warm-Up (0–200s):</strong> Elite runners (Q4) quickly achieve higher O₂ exchange efficiency while their absolute O₂ uptake ramps up.<br/>
+      <strong>Threshold (200–700s):</strong> From 200 to 700 seconds, elite runners outperform all groups in both efficiency and uptake, reflecting peak cardiorespiratory performance.<br/>
+      <strong>Fatigue (700–1200s):</strong> After 700 seconds, elite runners’ efficiency and uptake decline fastest, signaling onset of fatigue.
+    </p>
+  </section>
+
+  <section class="writeup">
+    <h2>Design Rationale &amp; Development Process</h2>
+    <h3>Visual Encodings &amp; Interaction Choices</h3>
+    <p>
+        We chose to use two separate line plots to clearly distinguish between the two key oxygen metrics: exchange efficiency and uptake rate. This separation helps reduce visual clutter and allows each chart to focus on one physiological measure at a time. Each line represents a speed-based quantile group, with consistent colors across both charts for easy comparison. We added semi-transparent dots along the lines to show the proportion of runners still active at each second—the more opaque the dot, the more participants remained. To highlight different performance phases, we introduced shaded backgrounds that dim the areas outside the currently focused stage. This helps viewers quickly identify when key changes happen over time. We also included tooltips that appear when hovering over any point, displaying exact values for all groups at that moment. The combination of these features—side-by-side subgraphs, interactive tooltips, stage shading, and point opacity—was chosen to balance clarity, detail, and ease of exploration. We considered alternatives like stacked area charts or a single combined graph, but they made comparisons harder and overwhelmed the viewer with too much information at once. This final design keeps the focus on trends while giving users control to explore the data in a meaningful way.
+    </p>
+    <h3>Team &amp; Timeline</h3>
+    <p>
+      Our team of three split the work across data processing, D3 visualization, and UI design. 
+      Overall, we invested ~20 person-hours: data wrangling (7h), D3 implementation (8h), and styling & testing (5h).
+      The most time-intensive task was fine-tuning responsive interactions and ensuring cross-browser stability.
+    </p>
+  </section>
+</body>
+</html>
