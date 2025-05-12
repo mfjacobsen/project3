@@ -28,19 +28,23 @@ body {
 }
 
 main {
-    display: flex;
     justify-content: center;
     align-items: center;
     padding: 2rem;
 }
 
-#chart {
-    position:"relative";
+#main-window {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    gap: 2rem; }
+
+#chart, #side-chart {
+    display: flex;
+    flex-direction: column;
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 1000px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);     
 }
 
 #main-tooltip {
