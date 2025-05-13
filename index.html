@@ -18,6 +18,17 @@
     </header>
 
     <main>
+
+        <section class="intro" style="max-width: 900px; margin: 3rem auto; padding: 0 1rem; line-height: 1.6; font-size: 1rem;"></section>
+
+        <p>
+            <strong>Introduction:</strong> Our project focuses on how heart rate, breathing rate, and oxygen consumption change over time during treadmill running tests. 
+            The data comes from breath-by-breath physiological measurements collected by the University of Málaga, Spain, and published on PhysioNet. 
+            The main chart shows how many runners remain on the treadmill over time, while three bar charts below display average heart rate, 
+            respiratory rate, and oxygen uptake at each moment, grouped by performance level. All charts update interactively as users explore the timeline, 
+            helping them understand how the body responds to increasing physical stress.
+        </p>
+        </section>
         <div id = "main-window">
             <div id="chart"></div>
             <div id="sub-window">
@@ -32,14 +43,7 @@
                 From the start, we noticed a clear trend from the PhysioNet data: participants gradually dropped out as the trial progressed. This observation raised a natural question: What physiological factors might explain when and why runners reach their limit?
             </p>
             <p>
-                Thus, our project focuses on how heart rate, breathing rate, and oxygen consumption change over time during treadmill running tests. 
-                The data comes from breath-by-breath physiological measurements collected by the University of Málaga, Spain, and published on PhysioNet. 
-                The main chart shows how many runners remain on the treadmill over time, while three bar charts below display average heart rate, 
-                respiratory rate, and oxygen uptake at each moment, grouped by performance level. All charts update interactively as users explore the timeline, 
-                helping them understand how the body responds to increasing physical stress.
-            </p>
-            <p>
-                    We designed the visualization to highlight group-level differences in endurance and efficiency. Time was transformed from breath-based timestamps 
+                    Thus, we designed the visualization to highlight group-level differences in endurance and efficiency. Time was transformed from breath-based timestamps 
                 to seconds, then formatted as minutes and seconds to make the timeline intuitive. Runners were split into five performance groups based on their 
                 maximum treadmill speed. Color was used consistently across charts to represent these groups, helping users track them easily. We chose bar charts 
                 for the physiological metrics to support clear, direct comparison between groups at any moment. The y-axis ranges were fixed to ensure comparability 
