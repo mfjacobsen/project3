@@ -35,17 +35,42 @@ main {
 
 #main-window {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
     width: 100%;
     margin: 0 auto;
-    gap: 2rem; }
+}
 
-#chart, #side-chart {
-    display: flex;
-    flex-direction: column;
+#chart {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);     
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
+
+#sub-window {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    margin: auto auto;
+    height: 100%;
+    align-items: stretch;
+
+}
+
+#sub-chart-1, #sub-chart-2, #sub-chart-3 {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+}
+
+
 
 #main-tooltip {
     position: absolute;
