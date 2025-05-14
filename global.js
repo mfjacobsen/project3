@@ -698,26 +698,26 @@ function updateVO2Plot(time) {
 
     bars.exit().remove();
 }
-
-// Updates main plot tooltip position
+// Updates tooltip position
 function updateTooltipPosition(d, width, height) {
-
     const tooltip = document.getElementById('main-tooltip');
     const chartRect = document.querySelector('#chart svg').getBoundingClientRect();
 
     const scaleX = chartRect.width / width;
     const scaleY = chartRect.height / height;
 
-    const x = xScale(d.time) * scaleX + chartRect.left;
-    const y = chartRect.top;
+    const x = xScale(d.time) * scaleX + chartRect.left + window.scrollX;
 
-    // Flips tooltip side when near edge
-    const horizontalOffset = ( chartRect.right - x < tooltip.offsetWidth + 50) 
-        ? -tooltip.offsetWidth -20
+    // Vertically center relative to the SVG in document space
+    const y = chartRect.top + window.scrollY + chartRect.height / 2;
+
+    // Flip tooltip if near right edge
+    const horizontalOffset = (chartRect.right - (x - window.scrollX) < tooltip.offsetWidth + 50)
+        ? -tooltip.offsetWidth - 20
         : 20;
 
     tooltip.style.left = `${x + horizontalOffset}px`;
-    tooltip.style.top = `${y}px`;
+    tooltip.style.top = `${y - 40 - tooltip.offsetHeight / 2}px`;  // Vertically centered
 }
 
 // Renders main plot tool tip
@@ -739,7 +739,7 @@ function renderTooltipContent(row) {
 function updateTooltipVisibility(isVisible) {
     const tooltip = document.getElementById('main-tooltip');
 
-    if (typeof visible === 'boolean') {
+    if (typeof isVisible === 'boolean') {
         tooltip.hidden = !isVisible;
     } else {
         tooltip.hidden = !tooltip.hidden;
